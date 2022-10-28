@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 
 // components
 import TodoDetails from "../components/TodoDetails"
+import TodoForm from "../components/TodoForm"
 
 const Home = () => {
   const [todos, setTodos] = useState(null)
@@ -24,6 +25,7 @@ const Home = () => {
           <TodoDetails todo={todo} key={todo._id} />
         ))}
       </div>
+      <TodoForm />
     </div>
   )
 }
