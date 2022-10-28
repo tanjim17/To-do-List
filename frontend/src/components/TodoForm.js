@@ -30,6 +30,7 @@ const TodoForm = () => {
       setTitle('')
       setDescription('')
       setDate('')
+      window.location.reload()
       console.log('new todo added:', json)
     }
 

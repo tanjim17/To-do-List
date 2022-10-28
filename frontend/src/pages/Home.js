@@ -22,7 +22,7 @@ const Home = () => {
     <div className="home">
       <div className="todos">
         {todos && todos.map(todo => (
-          <TodoDetails todo={todo} key={todo._id} />
+          <TodoDetails todo={todo} key={todo._id} todos={todos} delTodo={setTodos}/>
         ))}
       </div>
       <TodoForm />
