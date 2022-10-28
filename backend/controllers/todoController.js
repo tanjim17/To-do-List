@@ -2,7 +2,7 @@ const Todo = require('../models/todoModel');
 const mongoose = require('mongoose');
 
 const getTodos = async (req, res) => {
-    const todos = await Todo.find({}).sort({date: -1});
+    const todos = await Todo.find({}).sort({date: 1});
     res.status(200).json(todos);
 };
 
@@ -30,8 +30,36 @@ const createTodo = async (req, res) => {
     }
 };
 
+const deleteTodo = async (req, res) => {
+    const {id} = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Invalid ID!'});
+    }
+
+    const todo = await Todo.findByIdAndDelete(id);
+    if (!todo) {
+        return res.status(404).json({error: 'To-do not found!'});
+    }
+    res.status(200).json(todo);
+};
+
+const updateTodo = async (req, res) => {
+    const {id} = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({error: 'Invalid ID!'});
+    }
+
+    const todo = await Todo.findByIdAndUpdate(id, req.body);
+    if (!todo) {
+        return res.status(404).json({error: 'To-do not found!'});
+    }
+    res.status(200).json(todo);
+};
+
 module.exports = {
     getTodos,
     getTodo,
     createTodo,
+    deleteTodo,
+    updateTodo,
 }
